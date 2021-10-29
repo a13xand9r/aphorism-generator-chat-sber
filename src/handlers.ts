@@ -15,7 +15,7 @@ export const noMatchHandler: SaluteHandler = ({ req, res }) => {
 
 export const helloHandler: SaluteHandler = ({ req, res }) => {
     const keyset = req.i18n(dictionary)
-    const responseText = keyset('404')
+    const responseText = keyset('Привет')
     res.setPronounceText(responseText)
     res.appendBubble(responseText)
     res.setAutoListening(true)
