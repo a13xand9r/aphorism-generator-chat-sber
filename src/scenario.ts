@@ -43,7 +43,11 @@ const userScenario = createUserScenario({
     },
     Aphorism: {
         match: req => {
-            return req.message.original_text.toLowerCase().includes('еще') || req.message.original_text.toLowerCase().includes('дальше') || req.message.original_text.toLowerCase().includes('ещё') || req.message.original_text.toLowerCase().includes('афоризм')
+            return req.message.original_text.toLowerCase().includes('еще') ||
+                req.message.original_text.toLowerCase().includes('дальше') ||
+                req.message.original_text.toLowerCase().includes('ещё') ||
+                req.message.original_text.toLowerCase().includes('цитата') ||
+                req.message.original_text.toLowerCase().includes('афоризм')
         },
         handle: aphorismHandler
     },
