@@ -27,7 +27,7 @@ export const aphorismHandler: SaluteHandler = async ({ res }) => {
     const { data } = await axios.get<Aphorism>('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&jsonp=parseQuote&lang=ru')
     console.log(data)
 
-    res.appendBubble(`${data.quoteText}${data.quoteAuthor ? ' ©\n' + data.quoteAuthor : ''}`)
+    res.appendBubble(`«${data.quoteText}»${data.quoteAuthor ? ' ©\n' + data.quoteAuthor : ''}`)
     res.setPronounceText(data.quoteText + data.quoteAuthor)
     res.appendSuggestions(['Ещё', 'Хватит'])
 }
