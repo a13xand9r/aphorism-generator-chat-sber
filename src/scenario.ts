@@ -27,7 +27,7 @@ const userScenario = createUserScenario({
         handle: helloHandler,
         children: {
             Yes: {
-                match: req => text('да', {normalized: true})(req) || text('начнем', {normalized: true})(req) || text('давать', {normalized: true})(req),
+                match: req => text('да', {normalized: true})(req) || req.message.normalized_text.includes('начать') || req.message.normalized_text.includes('давать'),
                 handle: aphorismHandler
             },
             No: {

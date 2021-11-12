@@ -2,12 +2,14 @@ import { SaluteHandler } from '@salutejs/scenario'
 import axios from 'axios'
 import * as dictionary from './system.i18n'
 import { Aphorism } from './types'
+import { getCleanString } from './utils/utils'
 
 export const runAppHandler: SaluteHandler = ({ req, res }, dispatch) => {
     dispatch && dispatch(['Hello'])
 }
 
 export const noMatchHandler: SaluteHandler = ({ req, res }) => {
+    console.log(req.message.normalized_text)
     const keyset = req.i18n(dictionary)
     res.setPronounceText(keyset('404'))
     res.appendBubble(keyset('404'))
@@ -27,7 +29,7 @@ export const aphorismHandler: SaluteHandler = async ({ res }) => {
     const { data } = await axios.get<Aphorism>('https://api.forismatic.com/api/1.0/?method=getQuote&format=json&jsonp=parseQuote&lang=ru')
     console.log(data)
 
-    res.appendBubble(`«${data.quoteText}»${data.quoteAuthor ? ' ©\n' + data.quoteAuthor : ''}`)
+    res.appendBubble(`«${getCleanString(data.quoteText)}»${data.quoteAuthor ? ' ©\n' + data.quoteAuthor : ''}`)
     res.setPronounceText(data.quoteText + data.quoteAuthor)
     res.appendSuggestions(['Ещё', 'Хватит'])
 }

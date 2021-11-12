@@ -27,6 +27,13 @@ export function getUniqCompliment(oldCompliments: number[]) {
     return {compliment: compliments[complimentId], complimentId}
 }
 
+export const getCleanString = (text: string) => {
+    const textArr = text.trim().split('')
+    if (textArr[0] === '(') textArr.splice(0, 1)
+    if (textArr[textArr.length-1] === '.') textArr.splice(textArr.length-1, 1)
+    return textArr.join('')
+}
+
 // const youObjNoOfficial = {
 //     'Ваш': 'Твой',
 //     'Вашего': 'Твоего',
